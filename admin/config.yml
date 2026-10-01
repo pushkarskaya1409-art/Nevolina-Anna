@@ -1,0 +1,81 @@
+# После подключения сайта в Decap Turbo сюда будет подставлен Site ID.
+backend:
+  name: turbo-github
+  turbo_site_id: REPLACE_WITH_DECAP_TURBO_SITE_ID
+  branch: main
+
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+site_url: "https://REPLACE_WITH_YOUR_TUQO_DOMAIN"
+display_url: "https://REPLACE_WITH_YOUR_TUQO_DOMAIN"
+logo_url: "/images/uploads/admin-logo.png"
+
+publish_mode: simple
+
+collections:
+  - name: "site"
+    label: "Тексты сайта"
+    files:
+      - label: "Главная страница"
+        name: "site"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          - {label: "Имя", name: "name", widget: "string"}
+          - {label: "Подпись", name: "tagline", widget: "string"}
+          - {label: "Заголовок главной", name: "home_title", widget: "string"}
+          - {label: "Вступление", name: "home_intro", widget: "text"}
+          - {label: "SEO-описание", name: "home_description", widget: "text"}
+          - {label: "Заголовок карточки", name: "home_card_title", widget: "string"}
+          - {label: "Текст карточки", name: "home_card_text", widget: "text"}
+          - {label: "Заголовок философии", name: "philosophy_title", widget: "string"}
+          - {label: "Текст философии", name: "philosophy_text", widget: "markdown"}
+          - {label: "Цитата", name: "quote", widget: "text"}
+          - {label: "Текст внизу сайта", name: "footer", widget: "string"}
+      - label: "Страницы и разделы"
+        name: "pages"
+        file: "content/pages.json"
+        format: "json"
+        fields:
+          - label: "Карточки главной"
+            name: "cards"
+            widget: "list"
+            fields:
+              - {label: "Надпись", name: "kicker", widget: "string"}
+              - {label: "Заголовок", name: "title", widget: "string"}
+              - {label: "Текст", name: "text", widget: "text"}
+              - {label: "Ссылка", name: "link", widget: "string"}
+          - label: "Страницы"
+            name: "pages"
+            widget: "list"
+            fields:
+              - {label: "Системное имя", name: "slug", widget: "string"}
+              - {label: "Название", name: "title", widget: "string"}
+              - {label: "Короткое описание", name: "intro", widget: "text"}
+              - {label: "SEO-описание", name: "description", widget: "text"}
+              - {label: "Текст страницы", name: "body", widget: "markdown"}
+              - {label: "Теги", name: "tags", widget: "list", required: false}
+          - label: "Разделы портфолио"
+            name: "portfolio"
+            widget: "list"
+            fields:
+              - {label: "Системное имя", name: "slug", widget: "string"}
+              - {label: "Надпись", name: "kicker", widget: "string"}
+              - {label: "Название", name: "title", widget: "string"}
+              - {label: "Описание", name: "text", widget: "text"}
+              - {label: "Заголовок альбома", name: "gallery_title", widget: "string"}
+              - {label: "Текст альбома", name: "gallery_text", widget: "text"}
+
+  - name: "blog"
+    label: "Блог"
+    label_singular: "Публикация"
+    folder: "content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog/{{slug}}.html"
+    fields:
+      - {label: "Заголовок", name: "title", widget: "string"}
+      - {label: "Дата", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "Краткое описание", name: "description", widget: "text"}
+      - {label: "Главное фото", name: "image", widget: "image", required: false}
+      - {label: "Текст публикации", name: "body", widget: "markdown"}

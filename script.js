@@ -1,0 +1,1 @@
+const toggle=document.querySelector('.menu-toggle');const header=document.querySelector('.header');if(toggle)toggle.addEventListener('click',()=>header.classList.toggle('open'));document.querySelectorAll('.nav a').forEach(a=>{if(a.pathname===location.pathname)a.classList.add('active')});
