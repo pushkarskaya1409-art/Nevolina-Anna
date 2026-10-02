@@ -1,16 +1,28 @@
-# После подключения сайта в Decap Turbo сюда будет подставлен Site ID.
+# Decap CMS: редактирование всего содержания сайта
 backend:
   name: turbo-github
-  turbo_site_id: e10c3f73-601c-4179-9c31-56ed43c5a33d
+  turbo_site_id: REPLACE_WITH_DECAP_TURBO_SITE_ID
   branch: main
 
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
-site_url: "https://anna-nevolina.tuqo.ru/"
-display_url: "https://anna-nevolina.tuqo.ru/"
-logo_url: "/images/uploads/admin-logo.png"
+site_url: "https://anna-nevolina.tuqo.ru"
+display_url: "https://anna-nevolina.tuqo.ru"
 
 publish_mode: simple
+
+# Для изображений можно выбрать файл с компьютера или вставить URL.
+# Для документов предусмотрена отдельная ссылка — удобно для Яндекс Диска,
+# Google Drive, Облака Mail.ru и других облачных хранилищ.
+
+x-material-fields: &material-fields
+  - {label: "Название материала", name: "title", widget: "string"}
+  - {label: "Текст", name: "text", widget: "markdown", required: false}
+  - {label: "Фото", name: "image", widget: "image", required: false, choose_url: true}
+  - {label: "Подпись к фото", name: "image_alt", widget: "string", required: false}
+  - {label: "Ссылка на документ / облако", name: "document_url", widget: "string", required: false, hint: "Вставьте ссылку на PDF, Word, Яндекс Диск, Google Drive, Облако Mail.ru и т.п."}
+  - {label: "Название ссылки", name: "document_label", widget: "string", required: false, default: "Открыть документ"}
+  - {label: "Дата", name: "date", widget: "date", required: false, format: "YYYY-MM-DD"}
 
 collections:
   - name: "site"
@@ -21,16 +33,38 @@ collections:
         file: "content/site.json"
         format: "json"
         fields:
-          - {label: "Имя", name: "name", widget: "string"}
-          - {label: "Подпись", name: "tagline", widget: "string"}
+          - {label: "Имя воспитателя", name: "name", widget: "string"}
+          - {label: "Подпись под именем", name: "tagline", widget: "string"}
+          - {label: "Фото воспитателя", name: "home_photo", widget: "image", required: false, choose_url: true, hint: "Загрузите фото или вставьте прямую ссылку на изображение."}
+          - {label: "Описание фото", name: "home_photo_alt", widget: "string", required: false}
+          - {label: "Кнопка «Познакомиться»", name: "home_about_button_label", widget: "string", default: "Познакомиться"}
+          - {label: "Кнопка «Блог»", name: "home_blog_button_label", widget: "string", default: "Блог"}
+          - {label: "Кнопка «Портфолио»", name: "home_portfolio_button_label", widget: "string", default: "Портфолио"}
+          - label: "Меню сайта"
+            name: "nav"
+            widget: "list"
+            required: false
+            collapsed: true
+            summary: '{{fields.label}} → {{fields.link}}'
+            fields:
+              - {label: "Надпись", name: "label", widget: "string"}
+              - {label: "Ссылка", name: "link", widget: "string", hint: "Например: about.html или https://..."}
+          - {label: "Ключевые слова для поиска", name: "site_keywords", widget: "text", required: false}
           - {label: "Заголовок главной", name: "home_title", widget: "string"}
-          - {label: "Вступление", name: "home_intro", widget: "text"}
+          - {label: "Вступление", name: "home_intro", widget: "markdown"}
           - {label: "SEO-описание", name: "home_description", widget: "text"}
           - {label: "Заголовок карточки", name: "home_card_title", widget: "string"}
-          - {label: "Текст карточки", name: "home_card_text", widget: "text"}
+          - {label: "Текст карточки", name: "home_card_text", widget: "markdown"}
           - {label: "Заголовок философии", name: "philosophy_title", widget: "string"}
           - {label: "Текст философии", name: "philosophy_text", widget: "markdown"}
           - {label: "Цитата", name: "quote", widget: "text"}
+          - label: "Материалы на главной"
+            name: "home_materials"
+            widget: "list"
+            required: false
+            collapsed: true
+            summary: '{{fields.title}}'
+            fields: *material-fields
           - {label: "Текст внизу сайта", name: "footer", widget: "string"}
       - label: "Страницы и разделы"
         name: "pages"
@@ -40,31 +74,61 @@ collections:
           - label: "Карточки главной"
             name: "cards"
             widget: "list"
+            summary: '{{fields.title}}'
             fields:
               - {label: "Надпись", name: "kicker", widget: "string"}
               - {label: "Заголовок", name: "title", widget: "string"}
-              - {label: "Текст", name: "text", widget: "text"}
+              - {label: "Текст", name: "text", widget: "markdown"}
               - {label: "Ссылка", name: "link", widget: "string"}
-          - label: "Страницы"
+              - label: "Материалы карточки"
+                name: "materials"
+                widget: "list"
+                required: false
+                collapsed: true
+                summary: '{{fields.title}}'
+                fields: *material-fields
+          - label: "Обычные страницы"
             name: "pages"
             widget: "list"
+            collapsed: true
+            summary: '{{fields.title}}'
             fields:
-              - {label: "Системное имя", name: "slug", widget: "string"}
+              - {label: "Системное имя страницы", name: "slug", widget: "string"}
               - {label: "Название", name: "title", widget: "string"}
-              - {label: "Короткое описание", name: "intro", widget: "text"}
+              - {label: "Короткое описание", name: "intro", widget: "markdown"}
               - {label: "SEO-описание", name: "description", widget: "text"}
-              - {label: "Текст страницы", name: "body", widget: "markdown"}
+              - {label: "Общий текст страницы", name: "body", widget: "markdown"}
+              - {label: "Обложка страницы", name: "cover_image", widget: "image", required: false, choose_url: true}
+              - {label: "Описание обложки", name: "cover_image_alt", widget: "string", required: false}
               - {label: "Теги", name: "tags", widget: "list", required: false}
+              - label: "Материалы и записи на странице"
+                name: "materials"
+                widget: "list"
+                required: false
+                collapsed: true
+                summary: '{{fields.title}}'
+                fields: *material-fields
           - label: "Разделы портфолио"
             name: "portfolio"
             widget: "list"
+            collapsed: true
+            summary: '{{fields.title}}'
             fields:
               - {label: "Системное имя", name: "slug", widget: "string"}
               - {label: "Надпись", name: "kicker", widget: "string"}
               - {label: "Название", name: "title", widget: "string"}
-              - {label: "Описание", name: "text", widget: "text"}
+              - {label: "Описание", name: "text", widget: "markdown"}
+              - {label: "Обложка раздела", name: "cover_image", widget: "image", required: false, choose_url: true}
+              - {label: "Описание обложки", name: "cover_image_alt", widget: "string", required: false}
               - {label: "Заголовок альбома", name: "gallery_title", widget: "string"}
-              - {label: "Текст альбома", name: "gallery_text", widget: "text"}
+              - {label: "Текст альбома", name: "gallery_text", widget: "markdown"}
+              - label: "Материалы портфолио"
+                name: "materials"
+                widget: "list"
+                required: false
+                collapsed: true
+                summary: '{{fields.title}}'
+                fields: *material-fields
 
   - name: "blog"
     label: "Блог"
@@ -76,6 +140,15 @@ collections:
     fields:
       - {label: "Заголовок", name: "title", widget: "string"}
       - {label: "Дата", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
-      - {label: "Краткое описание", name: "description", widget: "text"}
-      - {label: "Главное фото", name: "image", widget: "image", required: false}
+      - {label: "Краткое описание", name: "description", widget: "markdown", required: false}
+      - {label: "Главное фото", name: "image", widget: "image", required: false, choose_url: true}
+      - {label: "Ссылка на документ / облако", name: "document_url", widget: "string", required: false, hint: "Можно вставить ссылку на Яндекс Диск, Google Drive, Облако Mail.ru и т.п."}
+      - {label: "Название ссылки", name: "document_label", widget: "string", required: false, default: "Открыть материал"}
       - {label: "Текст публикации", name: "body", widget: "markdown"}
+      - label: "Дополнительные материалы"
+        name: "materials"
+        widget: "list"
+        required: false
+        collapsed: true
+        summary: '{{fields.title}}'
+        fields: *material-fields
