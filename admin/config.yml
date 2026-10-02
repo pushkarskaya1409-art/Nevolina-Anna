@@ -1,7 +1,7 @@
 # Decap CMS: редактирование всего содержания сайта
 backend:
   name: turbo-github
-  turbo_site_id: e10c3f73-601c-4179-9c31-56ed43c5a33d
+  turbo_site_id: REPLACE_WITH_DECAP_TURBO_SITE_ID
   branch: main
 
 media_folder: "static/images/uploads"
@@ -66,6 +66,47 @@ collections:
             summary: '{{fields.title}}'
             fields: *material-fields
           - {label: "Текст внизу сайта", name: "footer", widget: "string"}
+          - {label: "Должность", name: "job_title", widget: "string"}
+          - {label: "Организация", name: "organization", widget: "string"}
+          - {label: "Подпись над заголовком", name: "home_eyebrow", widget: "string", required: false}
+          - {label: "Текст-заглушка фото", name: "home_photo_placeholder", widget: "string", required: false}
+          - label: "Страница портфолио"
+            name: "portfolio_page"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Заголовок", name: "title", widget: "string", required: false}
+              - {label: "Вступление", name: "intro", widget: "text", required: false}
+              - {label: "SEO-описание", name: "description", widget: "text", required: false}
+          - label: "Страница блога"
+            name: "blog_page"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Заголовок", name: "title", widget: "string", required: false}
+              - {label: "Вступление", name: "intro", widget: "text", required: false}
+              - {label: "SEO-описание", name: "description", widget: "text", required: false}
+          - {label: "Проверка Google", name: "google_verification", widget: "string", required: false, hint: "Вставьте код Google Search Console после получения."}
+          - {label: "Проверка Яндекс", name: "yandex_verification", widget: "string", required: false, hint: "Вставьте код Яндекс Вебмастера после получения."}
+          - label: "Подписи интерфейса"
+            name: "labels"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Главная", name: "home", widget: "string", required: false}
+              - {label: "Портфолио", name: "portfolio", widget: "string", required: false}
+              - {label: "Блог", name: "blog", widget: "string", required: false}
+              - {label: "Материалы", name: "materials", widget: "string", required: false}
+              - {label: "Материалы на главной", name: "home_materials", widget: "string", required: false}
+              - {label: "Материалы раздела", name: "page_materials", widget: "string", required: false}
+              - {label: "Дополнительные материалы", name: "additional_materials", widget: "string", required: false}
+              - {label: "Открыть документ", name: "open_document", widget: "string", required: false}
+              - {label: "Читать далее", name: "read_more", widget: "string", required: false}
+              - {label: "Добавить материалы", name: "portfolio_add", widget: "string", required: false}
+              - {label: "Заголовок пустого блога", name: "blog_empty_title", widget: "string", required: false}
+              - {label: "Текст пустого блога", name: "blog_empty_text", widget: "text", required: false}
+              - {label: "Кнопка редактора", name: "admin_button", widget: "string", required: false}
+              - {label: "Alt для изображения", name: "image_alt", widget: "string", required: false}
       - label: "Страницы и разделы"
         name: "pages"
         file: "content/pages.json"
