@@ -1,7 +1,7 @@
 # Decap CMS: редактирование всего содержания сайта
 backend:
   name: turbo-github
-  turbo_site_id: REPLACE_WITH_DECAP_TURBO_SITE_ID
+  turbo_site_id: e10c3f73-601c-4179-9c31-56ed43c5a33d
   branch: main
 
 media_folder: "static/images/uploads"
