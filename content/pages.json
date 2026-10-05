@@ -132,6 +132,13 @@
       "materials": [
         {
           "document_label": "Открыть документ",
+          "title": "Диплом Саша Б. за участие в конкурсе чтецов \"Моя семья\"",
+          "image_alt": "Диплом Саша Б. за участие в конкурсе чтецов \"Моя семья\"",
+          "document_url": "https://thumb.cloud.mail.ru/weblink/thumb/xw1/bnDX/CvMoxqQdi?mt=1791200131000",
+          "image": "https://thumb.cloud.mail.ru/weblink/thumb/xw1/bnDX/CvMoxqQdi?mt=1791200131000"
+        },
+        {
+          "document_label": "Открыть документ",
           "title": "Грамота Управления образования Сосновского муниципального района Челябинской области за 2 место в муниципальном этапе конкурса \"Подарки для елки\" Ксения К",
           "image_alt": "Грамота Управления образования Сосновского муниципального района Челябинской области за 2 место в муниципальном этапе конкурса \"Подарки для елки\" Ксения К",
           "document_url": "https://thumb.cloud.mail.ru/weblink/thumb/xw1/r4SC/EpPAfpFuy?mt=1791199567000",
@@ -221,13 +228,6 @@
           "image_alt": "Грамота за первое место в творческом конкурсе поделок \"Новогодние чудеса\" Ксения М.",
           "document_url": "https://thumb.cloud.mail.ru/weblink/thumb/xw1/6PTm/zPF3kkq61?mt=1791200045000",
           "image": "https://thumb.cloud.mail.ru/weblink/thumb/xw1/6PTm/zPF3kkq61?mt=1791200045000"
-        },
-        {
-          "document_label": "Открыть документ",
-          "title": "Диплом Саша Б. за участие в конкурсе чтецов \"Моя семья\"",
-          "image_alt": "Диплом Саша Б. за участие в конкурсе чтецов \"Моя семья\"",
-          "document_url": "https://thumb.cloud.mail.ru/weblink/thumb/xw1/bnDX/CvMoxqQdi?mt=1791200131000",
-          "image": "https://thumb.cloud.mail.ru/weblink/thumb/xw1/bnDX/CvMoxqQdi?mt=1791200131000"
         }
       ],
       "text": "Детские проекты, творческие работы и достижения.",
