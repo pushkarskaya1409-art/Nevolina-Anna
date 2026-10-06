@@ -37,9 +37,42 @@ function md(value = '') {
 }
 function inline(value) {
   return esc(value)
+
+    // YouTube
+    .replace(
+      /(^|\s)https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]+)(?:\?[^\s]*)?/g,
+      '$1<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/$2" title="Видео YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>'
+    )
+
+    // Rutube
+    .replace(
+      /(^|\s)https?:\/\/rutube\.ru\/video\/([A-Za-z0-9]+)\/?(?:\?[^\s]*)?/g,
+      '$1<div class="video-wrapper"><iframe src="https://rutube.ru/play/embed/$2" title="Видео Rutube" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>'
+    )
+
+    // VK Видео
+    .replace(
+      /(^|\s)https?:\/\/vk\.com\/video(-?\d+_\d+)(?:\?[^\s]*)?/g,
+      '$1<div class="video-wrapper"><iframe src="https://vk.com/video_ext.php?oid=$2" title="Видео VK" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>'
+    )
+
+    // Изображение из Markdown
+    .replace(
+      /!\[(.*?)\]\((https?:\/\/[^)]+)\)/g,
+      '<img class="inline-image" src="$2" alt="$1" loading="lazy">'
+    )
+
+    // Жирный текст
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+
+    // Курсив
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/\[(.+?)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+    // Обычные ссылки
+    .replace(
+      /\[(.+?)\]\((https?:\/\/[^)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
 }
 function imageSrc(item) { return item?.image || item?.image_url || ''; }
 function materialCard(item, labels) {
