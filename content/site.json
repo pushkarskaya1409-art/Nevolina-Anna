@@ -32,11 +32,11 @@
       "link": "portfolio.html"
     },
     {
-      "label": "Блог",
+      "label": "Обратная связь",
       "link": "blog.html"
     }
   ],
-  "home_blog_button_label": "Блог",
+  "home_blog_button_label": "Обратная связь",
   "portfolio_page": {
     "title": "Портфолио",
     "intro": "Путь педагога — это не витрина, а следы роста, поиска и совместных открытий.",
