@@ -50,11 +50,23 @@ function inline(value) {
       '$1<div class="video-wrapper"><iframe src="https://rutube.ru/play/embed/$2" title="Видео Rutube" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>'
     )
 
-    // VK Видео
+    
+    // VK Видео: vk.com и vkvideo.ru, включая hash
     .replace(
-      /(^|\s)https?:\/\/vk\.com\/video(-?\d+_\d+)(?:\?[^\s]*)?/g,
-      '$1<div class="video-wrapper"><iframe src="https://vk.com/video_ext.php?oid=$2" title="Видео VK" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>'
+      /(^|\s)https?:\/\/(?:www\.)?(?:vk\.com|vkvideo\.ru)\/video(-?\d+)_(\d+)(?:\/)?(?:\?([^\s<]+))?/g,
+      (match, before, oid, id, query = '') => {
+        const params = new URLSearchParams(query);
+        const hash = params.get('hash');
+        const playerParams = new URLSearchParams({
+          oid,
+          id,
+          ...(hash ? { hash } : {}),
+          hd: '3'
+        });
+        return `${before}<div class="video-wrapper"><iframe src="https://vkvideo.ru/video_ext.php?${playerParams.toString()}" title="Видео VK" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock" allowfullscreen></iframe></div>`;
+      }
     )
+
 
     // Изображение из Markdown
     .replace(
